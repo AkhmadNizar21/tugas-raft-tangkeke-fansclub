@@ -97,13 +97,14 @@ func (t *Raft) ClientRequest(args *LogEntry, reply *int) {
 type Node struct {
 	id      int16
 	address string // address dengan format IP:Port
+	port string
 	leader  bool
 }
 
 var members = []Node{
-	{1, "127.0.0.1:9000", false},
-	{2, "127.0.0.1:9001", false},
-	{3, "127.0.0.1:9003", false},
+	{1, "127.0.0.1:9000", "9000", false},
+	{2, "127.0.0.1:9001", "9001", false},
+	{3, "127.0.0.1:9003", "9003", false},
 }
 
 type LogEntry struct {
