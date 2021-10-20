@@ -24,7 +24,20 @@ func heartbeatCountdown() {
 		time.Sleep(1 * time.Millisecond)
 	}
 	// Implementasikan permintaan RPC RequestVote di sini
-
+	if heartbeat_counter == 0{
+		var result int
+		err = client.Call("Raft.RequestVote", &self, &result)
+		handleError(err)
+		isLeader = true
+		for _, server := range members{
+			if self == server{
+				server.leader = true
+			}else{
+				server.leader = false
+			}
+		}
+		self.leader = true
+	}
 }
 
 /*
@@ -162,12 +175,6 @@ func main() {
 
 	}
 	<-(chan int)(nil)
-}
-
-func handleError(err error) {
-	if err != nil {
-		fmt.Println("Error : ", err.Error())
-	}
 }
 
 func handleError(err error) {
