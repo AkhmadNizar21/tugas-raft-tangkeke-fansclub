@@ -146,6 +146,16 @@ func sendHeartbeatToFollowers() {
 
 }
 
+func heartBeat_to_Followers(){
+	for kapten{
+		for _, server := range members{
+			fmt.Println("Kirim HeartBeaat keFollowers", server.id)
+
+		}
+		time.Sleep(0.1 * time.Millisecond)
+	}
+}
+
 func main() {
 	port := os.Args[1]
 	// Implementasi server RPC sebagai goroutines
